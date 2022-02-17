@@ -99,39 +99,41 @@ struct Node
 // to head Node of given lined list.  head1_ref1 and *head_ref2
 // are pointers to head pointers of resultant two halves.
 
+int len(Node *p)
+{
+    int l = 0;
+    while(p){
+        l++;
+        p = p->next;
+    }
+    return l;
+}
+
 void splitList(Node *head, Node **head1_ref, Node **head2_ref)
 {
     // your code goes here
-    // your code goes here
-    //head slow, p fast
-    Node *p = head->next,  *q=head;
-    
-    while(p->next != head && p!= head)
+    Node *first = head, *temp = head, *t = head,*p = head;
+    *head1_ref = head;
+
+    while(temp->next != head)temp = temp->next;
+    temp -> next = nullptr;
+
+    int n =len(head);
+
+    Node *q = nullptr;
+
+
+    while(p && p->next)
     {
-        q =  q-> next;
+        q = t;
+        t = t->next;
         p = p->next->next;
     }
-    
-    
-    
-    *head1_ref = head;
-    *head2_ref = q->next;
-    
-    
-    q ->next = head;
-    
-    Node * temp = *head2_ref;
-    
-    while(temp->next != head)
-    {
-        temp = temp -> next;
-    }
-    
-    // head2_ref = head1_ref;
-    
-    temp ->next = *head2_ref;
-    
-    
-    
-    
+
+
+    *head2_ref = n&1 ? t->next:t;
+
+    temp->next = *head2_ref;
+
+    n&1?t->next = *head1_ref:q->next = *head1_ref;
 }
