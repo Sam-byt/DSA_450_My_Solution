@@ -1,0 +1,35 @@
+void interLeaveQueue(queue < int > & q) {
+    // Write your code here.
+    stack<int>s;
+    int n = q.size()>>1;
+    
+    for(int i=0; i<n; i++){
+        s.push(q.front());
+        q.pop();
+    }
+    
+    while(!s.empty()){
+        q.push(s.top());
+        s.pop();
+    }
+    
+    for(int i=0; i<n; i++)
+    {
+        q.push(q.front());
+        q.pop();
+    }
+    
+    for(int i=0;i<n;i++){
+        s.push(q.front());
+        q.pop();
+    }
+    
+    while(!s.empty()){
+        q.push(s.top());
+        s.pop();
+        q.push(q.front());
+        q.pop();
+    }
+    
+    
+}
